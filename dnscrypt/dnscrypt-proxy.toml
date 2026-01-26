@@ -1,0 +1,84 @@
+listen_addresses = ['0.0.0.0:53']
+
+max_clients = 250
+ipv4_servers = true
+ipv6_servers = false
+dnscrypt_servers = true
+doh_servers = true
+odoh_servers = true
+require_dnssec = false
+require_nolog = false
+require_nofilter = true
+disabled_server_names = []
+force_tcp = true
+http3 = true
+
+## SOCKS proxy
+proxy = 'socks5://sing-box:7890'
+#proxy = 'socks5://clash:7890'
+
+timeout = 5000
+keepalive = 30
+log_level = 2
+bootstrap_resolvers = ['185.51.200.2:53', '178.22.122.100:53', '114.114.114.114:53', '9.9.9.11:53', '8.8.8.8:53', '1.1.1.1:53']
+ignore_system_dns = false
+netprobe_timeout = 60
+netprobe_address = '8.8.8.8:53'
+offline_mode = false
+log_files_max_size = 10
+log_files_max_age = 7
+log_files_max_backups = 1
+block_ipv6 = true
+block_unqualified = true
+block_undelegated = true
+reject_ttl = 10
+cache = true
+cache_size = 4096
+cache_min_ttl = 2400
+cache_max_ttl = 86400
+cache_neg_min_ttl = 60
+cache_neg_max_ttl = 600
+forwarding_rules = '/etc/dnscrypt-proxy/forwarding-rules.txt'
+
+[query_log]
+  file = 'query.log'
+  format = 'tsv'
+
+[nx_log]
+  file = 'nx.log'
+  format = 'tsv'
+
+[sources]
+   [sources.public-resolvers]
+     urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md', 'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md']
+
+     cache_file = 'public-resolvers.md'
+     minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+     refresh_delay = 72
+     prefix = ''
+
+   [sources.relays]
+     urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/relays.md']
+     cache_file = 'relays.md'
+     minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+     refresh_delay = 72
+     prefix = ''
+
+  [sources.odoh-relays]
+    urls = ['https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/odoh-relays.md', 'https://download.dnscrypt.info/resolvers-list/v3/odoh-relays.md']
+    cache_file = 'odoh-relays.md'
+    minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+    refresh_delay = 24
+    prefix = ''
+#
+#   [sources.quad9-resolvers]
+#     urls = ['https://www.quad9.net/quad9-resolvers.md']
+#     minisign_key = 'RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN'
+#     cache_file = 'quad9-resolvers.md'
+#     prefix = 'quad9-'
+#
+[broken_implementations]
+    fragments_blocked = ['cisco', 'cisco-ipv6', 'cisco-familyshield', 'cisco-familyshield-ipv6', 'cleanbrowsing-adult', 'cleanbrowsing-adult-ipv6', 'cleanbrowsing-family', 'cleanbrowsing-family-ipv6', 'cleanbrowsing-security', 'cleanbrowsing-security-ipv6']
+
+#[cloaking]
+#cloaking_rules = 'cloaking-rules.txt'

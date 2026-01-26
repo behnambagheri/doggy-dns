@@ -1,0 +1,17 @@
+{
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in-local",
+      "listen": "0.0.0.0",
+      "listen_port": 7890,
+      "tcp_fast_open": true,
+      "tcp_multi_path": true,
+      "udp_fragment": true,
+      "udp_timeout": "5m",
+      "udp_disable_domain_unmapping": false,
+      "set_system_proxy": false
+    }
+  ]
+  }
+
