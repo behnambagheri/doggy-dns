@@ -1,0 +1,6 @@
+# One item per line.
+# Lines with a dot are treated as domain suffixes (exact domain + subdomains), e.g.:
+# instagram.com
+#
+# Lines without a dot are treated as plain keywords matched anywhere in qname, e.g.:
+instagram

@@ -1,0 +1,173 @@
+#### System ####
+127.0.0.1 localhost dns
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+
+########################################
+
+
+##### IP TLD #####
+##### XXX.XXX.XXX.XXX DOMAIN #####
+
+
+########################################
+#### Bitmax ####
+### bitmax.ir Records ###
+172.16.40.111   minio-bravo.bitmax.ir
+172.16.40.111   storage-bravo.bitmax.ir
+
+#--------------------------------------#
+
+### maxpool.site Records ###
+172.16.40.111   maxpool.site
+172.16.40.111   api.maxpool.site
+77.74.202.63    dev.maxpool.site
+#77.74.202.63    cdn.maxpool.site
+172.16.40.111   minio.maxpool.site
+172.16.40.111   storage.maxpool.site
+172.16.40.111   admin.maxpool.site
+172.16.40.111   local.maxpool.site
+
+#--------------------------------------#
+
+### maxpool.ir Records ###
+## Atlassian ##
+5.182.44.52     crowd.maxpool.ir
+5.182.44.52     docs.maxpool.ir
+5.182.44.52     jira.maxpool.ir
+5.182.44.52     git.maxpool.ir
+5.182.44.52     ci.maxpool.ir
+
+## Nexus ##
+172.16.40.111   docker.maxpool.ir
+172.16.40.111   nexus.maxpool.ir
+77.74.202.63    reg.maxpool.ir
+
+#--------------------------------------#
+
+### bimax.space Records ###
+77.74.202.60    wg.novin.bimax.space
+77.74.202.62    chat.bimax.space
+77.74.202.63    bitbucket-webhook.bimax.space
+77.74.202.63    jira-webhook.bimax.space
+77.74.202.63    sentry-webhook.bimax.space
+
+172.16.40.111   k8.novin.bimax.space
+172.16.40.111   api.bimax.space
+172.16.40.111   vpn.bimax.space
+167.235.102.157 k8.delta.bimax.space
+
+#--------------------------------------#
+
+### mybitmax.com Records ###
+## Monitoring ##
+37.32.8.101     prom.mybitmax.com
+37.32.8.101     alert.mybitmax.com
+37.32.8.101     graf.mybitmax.com
+
+167.235.102.154 mail.mybitmax.com
+77.74.202.63    meta.mybitmax.com
+172.16.40.111   sentry.mybitmax.com
+
+#--------------------------------------#
+
+#### Internal ####
+172.16.40.131   proxy.novin.bitmax.internal
+192.168.10.246  proxy.office.bitmax.internal
+
+#--------------------------------------#
+
+### Nikneshan Records ###
+172.16.40.11    master1.novin
+172.16.40.12    master2.novin
+172.16.40.13    master3.novin
+172.16.40.21    etcd1.novin
+172.16.40.22    etcd2.novin
+172.16.40.23    etcd3.novin
+172.16.40.31    worker1.novin
+172.16.40.32    worker2.novin
+172.16.40.33    worker3.novin
+172.16.40.34    worker4.novin
+172.16.40.35    worker5.novin
+172.16.40.36    worker6.novin
+172.16.40.37    worker7.novin
+172.16.40.38    worker8.novin
+172.16.40.61    nfs.novin
+172.16.40.71    rabbit.novin
+172.16.40.81    redis.novin
+172.16.40.91    influx.novin kafka.novin
+172.16.40.101   postgresql.novin db.novin
+172.16.40.102   db-stage.novin postgresql-stage-exchange redis-stage-exchange rabbitmq-stage-exchange redis-stage.novin rabbitmq-stage.novin
+172.16.40.103   db-comp-stage.novin
+172.16.40.110   db-comp.novin
+172.16.40.111   loadbalacerapp1.novin
+172.16.40.112   loadbalancerapp2.novin
+172.16.40.113   loadbalanceropr1.novin
+172.16.40.111   loadbalancer.novin lb.novin
+172.16.40.121   blog.novin
+172.16.40.122   agent.novin
+172.16.40.124   reg.novin
+172.16.40.129   keys.novin
+172.16.40.126   nexus.novin
+172.16.40.127   backup.novin
+
+192.168.60.10   mon.delta
+192.168.60.13   keys.delta
+192.168.60.19   k8.delta
+192.168.60.18   lb.delta
+192.168.60.20   db.delta redis.delta rabbitmq.delta
+192.168.60.21   mohammad.delta
+192.168.60.24   security.delta
+192.168.60.26   comp-utxo.delta
+192.168.60.27   stage-db.delta
+192.168.60.31   ton-server.delta
+167.235.102.154 mail.delta
+
+
+########################################
+
+
+#### Maxdigital ####
+40.172.167.253  api-etf-stage.maxdigital.finance
+40.172.167.253  etf-stage.maxdigital.finance
+40.172.167.253  api-etf.maxdigital.finance
+40.172.167.253  etf.maxdigital.finance
+40.172.167.253  prom-etf.maxdigital.finance
+40.172.167.253  k8.maxdigital.finance
+
+
+########################################
+
+
+#### BEA ####
+## bea.sh Records ##
+172.25.50.120   splunk.bea.sh
+46.245.114.115  mail.bea.sh
+# 172.25.50.111 reg.bea.sh
+46.245.114.114  reg.bea.sh
+
+## behnam.pro Records ##
+46.245.114.114  matrix.behnam.pro
+46.245.114.114  matrix-rtc.behnam.pro
+46.245.114.114  element.behnam.pro
+46.245.114.114  registry.behnam.pro
+
+########################################
+
+
+#### Friends ####
+65.108.248.11 bsub.batochi.ir
+4.3.2.1 myfriend.com
+4.3.2.1 dns.test
+5.4.3.2 yourfriend.com
+
+
+########################################
+

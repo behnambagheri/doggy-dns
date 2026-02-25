@@ -43,6 +43,8 @@ services:
       - "5353/tcp"
     volumes:
       - ./dnsdist/dnsdist.conf:/etc/dnsdist/dnsdist.conf:ro
+      - ./dnsdist/ir-domains.txt:/etc/dnsdist/ir-domains.txt:ro
+      - ./dnsdist/free-domains.txt:/etc/dnsdist/free-domains.txt:ro
     depends_on:
       - dnscrypt
     networks:
