@@ -14,7 +14,8 @@ force_tcp = true
 http3 = true
 
 ## SOCKS proxy
-proxy = 'socks5://sing-box:7890'
+#proxy = 'socks5://sing-box:7890'
+proxy = 'socks5://172.16.40.131:7890'
 #proxy = 'socks5://clash:7890'
 
 timeout = 5000
