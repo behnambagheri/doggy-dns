@@ -5,19 +5,19 @@ This repo hosts a Docker Compose stack for a layered DNS resolver setup. Each se
 ## Resolution Flow
 
 ```
-Client -> dnsmasq (host overrides) -> unbound (cache, serve-expired)
+Client -> dnsmasq (hosts overrides)
        -> dnsdist (policy routing + failover/fallback)
-          -> Iran pool (default path for non-free domains)
-          -> free path (dnscrypt -> sing-box SOCKS egress)
+          -> free path (default: dnscrypt)
+          -> Iran pool (.ir + listed domains, when pool is healthy)
 ```
 
 ## Containers and Purpose
 
-- **dnscrypt (gists/dnscrypt-proxy)**: Encrypts and forwards DNS queries (DNSCrypt/DoH/ODoH). Uses `dnscrypt/dnscrypt-proxy.toml`, `forwarding-rules.txt`, and `cloaking-rules.txt`.
-- **sing-box (ghcr.io/sagernet/sing-box)**: SOCKS proxy used by dnscrypt for upstream egress. Configure via `sing-box/config.json` (see `config.json.example`).
-- **dnsdist (powerdns/dnsdist-18)**: Policy/load-balancer in front of upstream resolvers. Loads domain policies from `dnsdist/ir-domains.txt` and `dnsdist/free-domains.txt`, routes by suffix/keyword rules, and can fallback from Iran pool responses to the free path on bad answers.
-- **unbound (mvance/unbound)**: Caching resolver that forwards to dnsdist. Config in `unbound/local.conf` with `serve-expired` to keep serving responses during outages.
-- **dnsmasq (jpillora/dnsmasq)**: Local resolver binding port 53 on the host, forwarding to unbound and honoring `/etc/hosts` overrides. Config in `dnsmasq/local.conf`.
+- **dnscrypt (`docker.behnam.pro/gists/dnscrypt-proxy:war`)**: Encrypts and forwards DNS queries (DNSCrypt/DoH/ODoH). Uses `dnscrypt/dnscrypt-proxy.toml`, `forwarding-rules.txt`, and `cloaking-rules.txt`.
+- **dnsdist (`docker.behnam.pro/powerdns/dnsdist-19:war`)**: Policy/load-balancer in front of upstream resolvers. Loads domain policies from `dnsdist/ir-domains.txt` and `dnsdist/free-domains.txt`, routes by suffix/keyword rules, defaults to free path, and only sends Iran-bound traffic to the `iran` pool when it is up.
+- **dnsmasq (`docker.behnam.pro/jpillora/dnsmasq:war`)**: Local resolver binding port 53 on the host, forwarding to dnsdist and honoring local overrides from `dnsmasq/hosts`.
+- **sing-box**: Present in `compose.yaml` but currently commented out.
+- **unbound**: Present in `compose.yaml` and `unbound/local.conf` but currently commented out in active runtime flow.
 
 ## Project Layout
 
@@ -66,5 +66,5 @@ dig myfriend.com @127.0.0.1
 
 - `dnsmasq` binds port 53 on the host; you may need elevated privileges.
 - Create `sing-box/config.json` from `config.json.example` and keep credentials private.
-- For blackout scenarios, tune cache retention in `unbound/local.conf` (e.g., `serve-expired-ttl`) to keep serving responses even when upstreams are unreachable.
+- `dnsdist` currently uses `free` as the default route and falls back to free when Iran pool servers are unavailable.
 - Keep large domain lists in `dnsdist/ir-domains.txt` updated carefully; dnsdist loads them at startup.

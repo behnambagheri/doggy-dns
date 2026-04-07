@@ -76,6 +76,8 @@ ff02::3 ip6-allhosts
 77.74.202.63    meta.mybitmax.com
 172.16.40.111   sentry.mybitmax.com
 
+172.16.40.131   chat.mybitmax.com
+
 #--------------------------------------#
 
 #### Internal ####
@@ -158,6 +160,18 @@ ff02::3 ip6-allhosts
 46.245.114.114  matrix-rtc.behnam.pro
 46.245.114.114  element.behnam.pro
 46.245.114.114  registry.behnam.pro
+46.245.114.114  ip.behnam.pro
+46.245.114.114  tg.behnam.pro
+46.245.114.114  paste.behnam.pro
+46.245.114.114  s.behnam.pro
+46.245.114.114  shortener.behnam.pro
+46.245.114.114  drive.behnam.pro
+46.245.114.114  meet.behnam.pro
+46.245.114.114  desk.behnam.pro
+46.245.114.114  nexus.behnam.pro
+46.245.114.114  docker.behnam.pro
+46.245.114.114  reg.behnam.pro
+46.245.114.114  behnam.pro
 
 ########################################
 
@@ -167,7 +181,22 @@ ff02::3 ip6-allhosts
 4.3.2.1 myfriend.com
 4.3.2.1 dns.test
 5.4.3.2 yourfriend.com
+185.143.234.235 m.hrkp.ir
+
+########################################
+
+109.230.81.134 global.yunatt.com
+185.143.234.235 api.bitycle.com
 
 
 ########################################
 
+
+#### LAP ####
+172.20.22.8     remote1.langarabi.com
+172.20.22.21    remote2.langarabi.com
+172.20.22.22    remote3.langarabi.com
+172.20.22.23    remote4.langarabi.com
+
+
+########################################

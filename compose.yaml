@@ -1,6 +1,7 @@
 services:
   dnscrypt:
-    image: gists/dnscrypt-proxy
+#    image: gists/dnscrypt-proxy
+    image: docker.behnam.pro/gists/dnscrypt-proxy:war
     container_name: dnscrypt
     restart: unless-stopped
     expose:
@@ -10,32 +11,34 @@ services:
       - ./dnscrypt/forwarding-rules.txt:/etc/dnscrypt-proxy/forwarding-rules.txt
       - ./dnscrypt/cloaking-rules.txt:/etc/dnscrypt-proxy/cloaking-rules.txt
       - ./dnscrypt/public-resolvers.md:/var/cache/dnscrypt-proxy/public-resolvers.md
-    depends_on:
-      - sing-box
+#    depends_on:
+#      - sing-box
     networks:
       dns_net:
         ipv4_address: 172.28.0.3
 
-  sing-box:
-    image: ghcr.io/sagernet/sing-box:latest
-    container_name: sing-box
-    restart: unless-stopped
-    expose:
-      - "7890"
-    ports:
-      - "127.0.0.1:7890:7890/tcp"
-    volumes:
-      - ./sing-box/config.json:/etc/sing-box/config.json
-    command: -D /var/lib/sing-box -C /etc/sing-box/ run
-    networks:
-      dns_net:
-        ipv4_address: 172.28.0.4
+#  sing-box:
+##    image: ghcr.io/sagernet/sing-box:latest
+#    image: docker.behnam.pro/sagernet/sing-box:war
+#    container_name: sing-box
+#    restart: unless-stopped
+#    expose:
+#      - "7890"
+#    ports:
+#      - "127.0.0.1:7890:7890/tcp"
+#    volumes:
+#      - ./sing-box/config.json:/etc/sing-box/config.json
+#    command: -D /var/lib/sing-box -C /etc/sing-box/ run
+#    networks:
+#      dns_net:
+#        ipv4_address: 172.28.0.4
 
   # ------------------------------------------
   # dnsdist (policy/load-balancer)
   # ------------------------------------------
   dnsdist:
-    image: powerdns/dnsdist-18:1.8.3
+#    image: powerdns/dnsdist-19:1.9.11
+    image: docker.behnam.pro/powerdns/dnsdist-19:war
     container_name: dnsdist
     restart: unless-stopped
     expose:
@@ -54,29 +57,30 @@ services:
   # ------------------------------------------
   # unbound (cache + serve-expired + forward)
   # ------------------------------------------
-  unbound:
-    image: mvance/unbound:1.19.2
-    container_name: unbound
-    restart: unless-stopped
-    healthcheck:
-      disable: true
-
-    expose:
-      - "5335/udp"
-      - "5335/tcp"
-    volumes:
-      - ./unbound/local.conf:/opt/unbound/etc/unbound/unbound.conf:ro
-    depends_on:
-      - dnsdist
-    networks:
-      dns_net:
-        ipv4_address: 172.28.0.7
+#  unbound:
+#    image: docker.behnam.pro/mvance/unbound:war
+#    container_name: unbound
+#    restart: unless-stopped
+#    healthcheck:
+#      disable: true
+#
+#    expose:
+#      - "5335/udp"
+#      - "5335/tcp"
+#    volumes:
+#      - ./unbound/local.conf:/opt/unbound/etc/unbound/unbound.conf:ro
+#    depends_on:
+#      - dnsdist
+#    networks:
+#      dns_net:
+#        ipv4_address: 172.28.0.7
 
   # ------------------------------------------
   # dnsmasq (simple local resolver on 53)
   # ------------------------------------------
   dnsmasq:
-    image: jpillora/dnsmasq:latest
+#    image: jpillora/dnsmasq:latest
+    image: docker.behnam.pro/jpillora/dnsmasq:war
     container_name: dnsmasq
     restart: unless-stopped
     # Bind DNS to localhost only on the host (safer).
@@ -85,9 +89,10 @@ services:
       - "53:53/tcp"
     volumes:
       - ./dnsmasq/local.conf:/etc/dnsmasq.conf:ro
-      - /etc/hosts:/etc/hosts:ro
-    depends_on:
-      - unbound
+      - ./dnsmasq/hosts:/etc/hosts:ro
+#      - ./dnsmasq:/var/log/dnsmasq/
+#    depends_on:
+#      - unbound
     networks:
       dns_net:
         ipv4_address: 172.28.0.8
@@ -101,3 +106,26 @@ networks:
         - subnet: 172.28.0.0/28
 
 
+
+#  coredns:
+#    image: coredns/coredns:latest
+#    container_name: coredns
+#    restart: unless-stopped
+#    ports:
+#      - "53:53/udp"
+#      - "53:53/tcp"
+#      - "9153:9153"
+#      - "127.0.0.1:8090:8090"
+#
+#    volumes:
+#      - ./coredns/Corefile:/Corefile
+#      - ./coredns/hosts.override:/hosts.override
+#    command: -conf /Corefile
+#    healthcheck:
+#      test: [ "CMD", "wget", "-qO-", "http://127.0.0.1:8090/health" ]
+#      interval: 10s
+#      timeout: 3s
+#      retries: 10
+#    networks:
+#      dns_net:
+#        ipv4_address: 172.28.0.2
