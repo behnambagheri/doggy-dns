@@ -193,6 +193,7 @@ ff02::3 ip6-allhosts
 
 
 #### LAP ####
+172.20.22.2     dc.langarabi.com
 172.20.22.8     remote1.langarabi.com
 172.20.22.21    remote2.langarabi.com
 172.20.22.22    remote3.langarabi.com
